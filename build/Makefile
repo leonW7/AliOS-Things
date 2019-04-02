@@ -13,7 +13,7 @@ ifeq (,$(SUB_BUILD))
 JOBSNO := -j$(JOBS)
 endif
 
-MAKEFILE_TARGETS := clean distclean Help help # targets used by makefile
+MAKEFILE_TARGETS := clean distclean help # targets used by makefile
 
 # define commands on different hosts
 include $(MAKEFILES_PATH)/aos_host_cmd.mk
@@ -160,7 +160,7 @@ export AOS_APP_TYPE := AOS_APP_LOCALAPP
 endif
 
 boardname = $(word 2, $(components))
-boardmkfile = $(wildcard $(SOURCE_ROOT)board/$(boardname)/aos.mk $(SOURCE_ROOT)board/$(boardname)-*/aos.mk)
+boardmkfile = $(wildcard $(SOURCE_ROOT)board/$(boardname)/aos.mk)
 $(if $(boardmkfile),\
     $(eval include $(boardmkfile)) $(eval real_boardname = $(NAME)),\
     $(eval real_boardname = $(boardname)))
@@ -282,9 +282,9 @@ COMPONENT_DEPENDENCY_SCRIPT := $(SCRIPTS_PATH)/component_dependencies.py
 COMPONENT_DEPENDENCY = $(PYTHON) $(COMPONENT_DEPENDENCY_SCRIPT)
 export COMPONENT_DEPENDENCY
 
-.PHONY: $(BUILD_STRING) main_app clean Help help export_linkkit_sdk restore_linkkit_sdk
+.PHONY: $(BUILD_STRING) main_app clean help export_linkkit_sdk restore_linkkit_sdk
 
-Help help:
+help:
 	$(info $(USAGE_TEXT))
 	$(QUIET)$(ECHO)
 
